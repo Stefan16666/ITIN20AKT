@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4">
+                <img src="~/Content/bilder/reisebüro_logo.jpg" class="img-responsive" />
+            </div>
+            <div class="col-xs-3">
+                Wir sind seit 1979 Ihr Ansprechpartner für preisgünstige und qualitative Pauschalreisen
+                <div class="row login">
+                    @Html.ActionLink("Login", "Login", "Benutzer", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+            <div id="myCarousel" class="carousel slide col-xs-5" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="http://www.art-bijou.de/sites/default/files/VeedelK%C3%B6lnEinrahmung.jpg" class="img-responsive" alt="Chania">
+                    </div>
+                    <div class="item">
+                        <img src="http://www.stefan-niggemeier.de/blog/wp-content/ne8.jpg" class="img-responsive" alt="Chania">
+                    </div>
+                    <div class="item">
+                        <img src="http://www.eisenbahn-exklusiv-reisen.com/assets/images/4/skandinavien-nordlicht-69221-a6275d84.jpg" class="img-responsive" alt="Chania">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xs-1" align="right">
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid body-content">
+        @RenderBody()
+        <hr />
+        <footer class="footer navbar navbar-fixed-bottom">
+            <div class="container-fluid">
+                <div class="col-xs-12">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">AGB</a></li>
+                        <li><a href="#">Über uns</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

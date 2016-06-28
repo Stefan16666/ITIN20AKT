@@ -1,118 +1,55 @@
 USE reisebuero;
 GO
 
-CREATE TABLE [user] (
+CREATE TABLE Benutzer (
 	id INT IDENTITY NOT NULL,
 	email NVARCHAR(50) NOT NULL,
-	pwd NVARCHAR(50) NOT NULL,
-	vn NVARCHAR(50) NOT NULL,
-	nn NVARCHAR(50) NOT NULL,
-	geschlecht NVARCHAR(10) NOT NULL
-);
-
-CREATE TABLE ma (
-	id INT IDENTITY NOT NULL,
-	[user_id] INT NOT NULL,
-	svnr INT NOT NULL
-);
-
-CREATE TABLE phone (
-	id INT IDENTITY NOT NULL,
-	vw_id INT NOT NULL,
-	lvw_id INT NOT NULL,
-	nummer NVARCHAR(20) NOT NULL
-);
-
-CREATE TABLE user_phone (
-	id INT IDENTITY NOT NULL,
-	phone_id INT NOT NULL,
-	[user_id] INT NOT NULL
-);
-
-CREATE TABLE vw (
-	id INT IDENTITY NOT NULL,
-	nummer NVARCHAR(10)
-);
-
-CREATE TABLE lvw (
-	id INT IDENTITY NOT NULL,
-	nummer NVARCHAR(10)
-);
-
-CREATE TABLE adresse (
-	id INT IDENTITY NOT NULL,
-	nr NVARCHAR(10) NOT NULL,
-	str_id INT NOT NULL
-);
-
-CREATE TABLE strasse (
-	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50),
-	plz_id INT NOT NULL
-);
-
-CREATE TABLE plz (
-	id INT IDENTITY NOT NULL,
-	nr NVARCHAR(10),
-	stadt_id INT NOT NULL
-);
-
-CREATE TABLE stadt (
-	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50),
-	land_id INT NOT NULL
-);
-
-CREATE TABLE land (
-	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50)
-);
-
-CREATE TABLE user_adresse (
-	id INT IDENTITY NOT NULL,
+	passwort VARBINARY NOT NULL,
+	vorname NVARCHAR(50) NOT NULL,
+	nachname NVARCHAR(50) NOT NULL,
+	geschlecht BIT NOT NULL,
 	adresse_id INT NOT NULL,
-	[user_id] INT NOT NULL
+	telefon INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE kunde (
+CREATE TABLE Mitarbeiter (
 	id INT IDENTITY NOT NULL,
-	[user_id] INT NOT NULL,
-	gebDatum DATETIME NOT NULL,
-	titel NVARCHAR(50),
-	staatsbuergerschaft NVARCHAR(50)
+	benutzer_id INT NOT NULL,
+	svnr INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE buchung (
+CREATE TABLE Adresse (
+	id INT IDENTITY NOT NULL,
+	land_id INT NOT NULL,
+	ort_id INT NOT NULL,
+	plz INT NOT NULL,
+	strasse NVARCHAR(50) NOT NULL,
+	nummer NVARCHAR(25) NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Kunde (
+	id INT IDENTITY NOT NULL,
+	benutzer_id INT NOT NULL,
+	geburtsdatum DATETIME NOT NULL,
+	titel NVARCHAR(25),
+	land_id INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Buchung (
 	id INT IDENTITY NOT NULL,
 	kunde_id INT NOT NULL,
-	createdate DATETIME DEFAULT GETDATE()
+	reisedetail_id INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE buchungsdetail (
+CREATE TABLE Bewertung (
 	id INT IDENTITY NOT NULL,
-	buchung_id INT NOT NULL,
-	reise_id INT NOT NULL,
-	zahlung_id INT NOT NULL,
-	bewertung_id INT NOT NULL,
-	preiskategorie_id INT NOT NULL
-);
-
-CREATE TABLE zahlungsmittel (
-	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50) NOT NULL
-);
-
-CREATE TABLE preiskategorie (
-	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50) NOT NULL,
-	von NVARCHAR(30) NOT NULL,
-	bis NVARCHAR(30) NOT NULL,
-	val NVARCHAR(50) NOT NULL
-);
-
-CREATE TABLE bewertung (
-	id INT IDENTITY NOT NULL,
-	sterne INT NOT NULL
+	bewertung INT NOT NULL,
+	buchung_id INT NOT NULL
 );
 
 CREATE TABLE buchungsdetail_bewertung (
